@@ -111,7 +111,10 @@ function checkWallCollision() {
                     break;
             }
         });
-
+ // Start the game when the play button is clicked
+        playButton.addEventListener('click', () => {
+            homeScreen.style.display = 'none'; // Hide the home screen
+            canvas.style.display = 'block'; // Show the canvas
         // Start the game loop
         main();
     </script>

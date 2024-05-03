@@ -12,15 +12,24 @@
         canvas {
             border: 1px solid black;
             margin: 20px auto;
+      display: none; /* Hide canvas by default */  }
+    #homeScreen {
+            display: block;
         }
     </style>
 </head>
 <body>
+    <div id="homeScreen">
+        <h1>Welcome to Snake Game</h1>
+        <button id="playButton">Play</button>
+    </div>
     <h1>Snake Game</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
     <script>
-        // Get the canvas and context
+        // Get elements
+        const homeScreen = document.getElementById('homeScreen');
+        const playButton = document.getElementById('playButton');
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 

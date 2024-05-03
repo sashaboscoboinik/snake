@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid black;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Snake Game</h1>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+        // Get the canvas and context
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Snake properties
+        let snake = [{x: 10, y: 10}]; // Initial position of the snake
+        let dx = 0; // Initial movement direction
+        let dy = 0;
+        const blockSize = 20;
+
+        // Game loop
+        function main() {
+            clearCanvas();
+            update();
+            draw();
+            requestAnimationFrame(main);
+        }
+
+        // Clear canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Update game state
+        function update() {
+            // Update snake position based on direction
+            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+            snake.unshift(head); // Add new head
+            snake.pop(); // Remove tail
+        }
+
+        // Draw the snake
+        function draw() {
+            snake.forEach(segment => {
+                ctx.fillStyle = 'green';
+                ctx.fillRect(segment.x * blockSize, segment.y * blockSize, blockSize, blockSize);
+            });
+        }
+
+        // Handle arrow key press
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp':
+                    if (dy === 0) {
+                        dx = 0;
+                        dy = -1;
+                    }
+                    break;
+                case 'ArrowDown':
+                    if (dy === 0) {
+                        dx = 0;
+                        dy = 1;
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if (dx === 0) {
+                        dx = -1;
+                        dy = 0;
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (dx === 0) {
+                        dx = 1;
+                        dy = 0;
+                    }
+                    break;
+            }
+        });
+
+        // Start the game loop
+        main();
+    </script>
+</body>
+</html>
